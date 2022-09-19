@@ -1,0 +1,37 @@
+COURS SAR 14/09
+
+
+SPECIFICATION WORK
+========================================================================
+// Le Broker permet d'établir une connexion entre deux entités
+
+abstract class Broker {
+	Broker(String name);
+	
+	Channel accept(int port); // permet d'acepter une connexion sur un port spécifique
+	
+	Channel connect(String name, int port) //permet de demander une connexion sur un channel spécifique et sur un port spécifique
+	
+ }
+ 
+ 
+ abstract class Channel {
+ 
+ 	int read(byte[] byte, int offset, int length); // Cette méthode permet à l'une des deux entités (client) de lire un message qui a été envoyé. Le message est contenue dans un buffer (ou tableau d'octet) nommé byte. Il est nécessaire d'avoir en paramètre de cette méthode un indicateur du début de message (offset = position du début de message dans le buffer) ainsi que la longueur du message (length), pour que l'entité qui lise le message sache si elle a tout lu ou non. Cette méthode renvoie un entier, on suppose que c'est 1 si le message a bien été lu et 0 sinon. 
+ 	
+ 	int write(byte[]byte, int offset, int length); // Permet d'envoyer un message sur le canal. Il faut également qu'elle contienne les deux paramètres cités (indicateur de début de message et longueur) pour informer le futur lecteur du message. Renvoie 1 si le message a bien été envoyé et 0 sinon. 
+ 	
+ 	void disconnected(); // méthode permettant de déconnecter les deux entités. Cela doit libérer le port du broker qui a été utilisé. 
+ 	
+ 	boolean disconnected(); //méthode permettant de savoir si il y a une connexion en cours sur ce channel
+ 	
+ } =================================================================================
+ 
+ 
+ 
+ 
+ EXEMPLE  =================================================================================
+ Voir code java
+ 
+ =================================================================================
+
