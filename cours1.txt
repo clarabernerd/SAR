@@ -3,13 +3,13 @@ COURS SAR 14/09
 
 SPECIFICATION WORK
 ========================================================================
-// Le Broker permet de créer des Channel, avec un nom et un port. 
+// Le Broker permet de créer des Channel, avec un nom et un port. Créer deux objets Channel qui forment "un tuyau" avec deux sorties. 
 abstract class Broker {
 	Broker(String name);
 	
-	Channel accept(int port); // permet d'acepter une connexion sur un port spécifique
+	Channel accept(int port); // permet d'acepter une connexion sur un port spécifique. C'est bloquant.
 	
-	Channel connect(String name, int port) //permet de demander une connexion sur un channel spécifique et sur un port spécifique
+	Channel connect(String name, int port) //permet de demander une connexion sur un channel spécifique et sur un port spécifique. C'est bloquant.
 	
  }
  
@@ -31,6 +31,13 @@ Il fallait décider si on été dans le cas de UDP (on envoie un paquet et on re
  	
  	boolean disconnected(); //méthode permettant de savoir si il y a une connexion en cours sur ce channel. 
  	
+ }
+ 
+// Le fait qu'il y ait des threads ammène plusieurs points de vues. 
+//Du point de vue de read et write, on a pas besoin de synchronisation car les buffer de lecture et d'écriture sont différents : pas de partage de ressources.
+//Si on veut que plusieurs tâches partagent le même channel, ce n'est pas thread safe si on choisi d'utiliser la méthode TCP, car les méthodes read et write sont des boucles qui lisent et écrivent ce qu'elle peuvent. 
+ abstract class task extends Thread {
+ 
  } =================================================================================
  
  

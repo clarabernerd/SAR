@@ -1,7 +1,6 @@
 package exemple;
 
 public class Task1 extends Task {
-	
 	Broker my_broker;
 	Channel my_channel;
 	
