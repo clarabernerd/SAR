@@ -3,8 +3,7 @@ COURS SAR 14/09
 
 SPECIFICATION WORK
 ========================================================================
-// Le Broker permet d'établir une connexion entre deux entités
-
+// Le Broker permet de créer des Channel, avec un nom et un port. 
 abstract class Broker {
 	Broker(String name);
 	
@@ -14,16 +13,23 @@ abstract class Broker {
 	
  }
  
- 
+ //Permet une communication entre deux tâches. Permet de lire et d'envoyer des octets sur un channel. Deux channels sont connectés. si la connexion est coupée sur un des deux channel, l'autre peut continuer à lire ce qu'il reste mais ne peut pas écrire de nouveaux octets.
+Il fallait décider si on été dans le cas de UDP (on envoie un paquet et on reçoit un paquet) ou dans le cas TCP (on envoie un un flux d'octets). TCP est fifo et lossless ce qui n'est pas le cas de UDP. 
  abstract class Channel {
  
- 	int read(byte[] byte, int offset, int length); // Cette méthode permet à l'une des deux entités (client) de lire un message qui a été envoyé. Le message est contenue dans un buffer (ou tableau d'octet) nommé byte. Il est nécessaire d'avoir en paramètre de cette méthode un indicateur du début de message (offset = position du début de message dans le buffer) ainsi que la longueur du message (length), pour que l'entité qui lise le message sache si elle a tout lu ou non. Cette méthode renvoie un entier, on suppose que c'est 1 si le message a bien été lu et 0 sinon. 
+ 	int read(byte[] byte, int offset, int length); // Cette méthode permet à l'une des deux entités (client) de lire un message qui a été envoyé. Le message est contenue dans un buffer (ou tableau d'octet) nommé byte. Il est nécessaire d'avoir en paramètre de cette méthode un indicateur du début de message (offset = position du début de message dans le buffer) ainsi que la longueur du message (length), pour que l'entité qui lise le message sache si elle a tout lu ou non. Cette méthode renvoie un entier, on suppose que c'est 1 si le message a bien été lu et 0 sinon.
  	
- 	int write(byte[]byte, int offset, int length); // Permet d'envoyer un message sur le canal. Il faut également qu'elle contienne les deux paramètres cités (indicateur de début de message et longueur) pour informer le futur lecteur du message. Renvoie 1 si le message a bien été envoyé et 0 sinon. 
+ //CORRECTION : l'entier retourné est le nombre d'octet effectivement lu. On peut lever une exception si cet entier est différent de length. Si une exception est levée, on passe diconnected à true, on ne peut pas continuer à envoyer des octes sur le channel.
+ //La méthode read doit être bloquante pour ne pas faire une boucle qui va créer une attente active. On bloque soit quand la totalité du buffer est arrivé pour la lecture, ou bien quand un nombre inférieur d'octets à length est arrivé. 
  	
- 	void disconnected(); // méthode permettant de déconnecter les deux entités. Cela doit libérer le port du broker qui a été utilisé. 
+ 	int write(byte[]byte, int offset, int length); // Permet d'envoyer des octets sur le canal. Il faut également qu'elle contienne les deux paramètres cités (indicateur de début de message et longueur) pour informer le futur lecteur du message. Renvoie 1 si tout les octest on bien été envoyé et 0 sinon. 
  	
- 	boolean disconnected(); //méthode permettant de savoir si il y a une connexion en cours sur ce channel
+ //CORRECTION : On retourne ce qu'on a écrit et on attends pas que tout le buffer soit envoyé dans le channel. 
+ 	
+ 	void disconnected(); // méthode permettant de déconnecter les deux entités. Cela doit libérer le port du broker qui a été utilisé. Si c'est déconnecté sur un channel, on peut soit lever une exception et tout stopper sur l'autre channel même si il est entrain de lire. 
+ Soit on ne bloque sur l'autre channel si il y a encore des chose à lire (mais pas écrire). 
+ 	
+ 	boolean disconnected(); //méthode permettant de savoir si il y a une connexion en cours sur ce channel. 
  	
  } =================================================================================
  
