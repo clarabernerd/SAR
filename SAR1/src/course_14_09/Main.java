@@ -1,4 +1,4 @@
-package exemple;
+package course_14_09;
 
 public class Main {
 	

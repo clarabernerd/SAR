@@ -1,0 +1,17 @@
+DESIGN WORK : 21/09
+====================================================================================================================
+
+Design de la class Channel : 
+Il faut créer un channel par task, sur le même port pour que les task A et B puissent communiquer. 
+Un canal de communication est représenté par deux objets channel. 
+On utilise deux circularbuffer, un par task. Ils sont créés au moment de la création d'un channel. 
+Pour lire un message, on utilisera la méthode read() de la class Channel. Dans cette méthode, on verifiera que le circularbuffer de la task opposée n'est pas vide avec la méthode empty(). Si ce buffer n'est pas vide, cela signifie qu'on à bien quelquechose à lire. On utilisera donc la méthode pull().
+Pour écrire un message, on utilisera la méthode write() de la class Channel. Dans cette méthode, on vérifira que le circularbuffer de la task courante n'est pas plein avec la méthode full(). Si le buffer n'est pas plein, on pourra donc envoyer le message avec la méthode push(). 
+
+Design de la class Broker : 
+Il faut créer un Borker par objet channel (donc deux broker pour une communication entre deux task). 
+
+Design de la class Task : 
+Cette class doit étendre la class Thread fournie par Java car nos task peuvent être interprétées comme des processus d'execution. Les tasks doivent donc avoir le même comportement que des threads. 
+
+====================================================================================================================

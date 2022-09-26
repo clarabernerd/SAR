@@ -9,7 +9,7 @@ Chaque tâche à son propre broker et son propre channel. Deux objets channel fo
 
 La classe Channel permet de réaliser une communication entre deux tâches. Nous sommes ici sur un modèle de communication en flux d'octets entre les deux tâches. Si la connexion est coupée sur un des deux channel (donc sur une des deux tâches), l'autre peut continuer à lire les octets restant dans le channel mais ne peut plus écrire. 
 La méthode read renvoie le nombre d'octets effectivement lu par la tâche. Cette méthode doit être bloquante tant qu'il n'y a pas quelquechose à lire sur le channel. 
-La méthode write revoie le nombre d'octets qui ont été réellement envoyé, et -1 si il y a eu une erreur. Cela doit également levé une erreur qui coupe la connexion entre les deux tâches. 
+La méthode write revoie le nombre d'octets qui ont été réellement envoyé, et -1 si il y a eu une erreur. Cela doit également levé une erreur qui coupe la connexion entre les deux tâches. Un channel fonctionne toujours par paire de tâche. 
 
 Les tâches sont des entités qui s'envoient/ reçoivent des bytes au travers d'un channel. 
 Les méthodes ci-dessous ne sont pas thread-safe si on peut partagers les channels avec plus de deux tâches. 
