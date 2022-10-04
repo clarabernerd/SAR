@@ -1,0 +1,17 @@
+SPECIFICATION MESSAGE QUEUES
+============================================================================
+La classe QueueBroker permet de créer des objets MessageQueue avec un nom et un port. Ces objets MessageQueue serviront de canal de communication entre les deux task. 
+
+La méthode MessageQueue accept permet d'accepter une conexion sur un port spécifique. C'est une méthode bloquante qui renvoie un objet MessageQueue.
+La méthode MessageQueue connect permet de demander une connexion sur un port spécifique et sur un Queuebroker spécifique (il est identifier par son nom). C'est une méthode bloquante qui renvoie un autre objet MessageQueue.
+Chaque tâche à son propre Queuebroker et son propre MessageQueue. Deux objets MessageQueue forment donc le canal de communication entre deux tâches.
+Les méthodes connect et accept forment un rendez-vous. 
+
+La classe MessageQueue permet de réaliser une communication entre deux tâches. Nous sommes ici sur un modèle de communication en messages (paquets) entre les deux tâches. Si la connexion est coupée sur un des deux MessageQueue (donc sur une des deux tâches), alors plus aucune communication n'est possible et une exception est levée. 
+La méthode send permet d'envoyer un message sur le canal. Cette méthode doit être bloquante si le buffer utilisé pour envoyer le message est plein.
+La méthode receive revoie le message (morceau) qui a été reçus. Cette méthode doit être bloquante si il n'y a rien à lire dans la MessageQueue. 
+ 
+Les tâches sont des entités qui s'envoient/ reçoivent des messages au travers d'un MessageQueue. 
+Les méthodes ci-dessous sont thread-safe. Cela veut dire que plus que deux task peuvent communiquer sur un même MessageQueue.
+
+============================================================================

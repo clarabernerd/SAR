@@ -1,0 +1,15 @@
+DESIGN MESSAGE QUEUE
+============================================================================
+
+Dans cette exercice, on réalise une architecture en couche : on ajoute une couche "paquets" sur la couche "flux d'octets" déjà existante. 
+On fixe la taille des paquets envoyés.
+
+La classe MessageQueue permet la communication entre deux task ou plus. Elle contient les méthodes suivantes :  
+-la méthode send retourne uniquement le message envoyé. La taille(donc le nombre de paquets) du message effectivement envoyé sera calculé par la fonction. Cette méthode doit être bloquante le temps que tout les paquets soit envoyés.
+-la méthode recieve : lira la taille du message à recevoir dans l'entête du message. Elle lira ensuite le message reçus. 
+-la méthode close : bloque la connexion sur la messageQueue. 
+La classe MessageQueue utilisera les channel pour envoyer/recevoir des messages
+
+La classe QueueBroker utilisera la classe Broker.
+
+============================================================================
