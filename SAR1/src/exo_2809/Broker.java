@@ -33,7 +33,7 @@ public class Broker {
 		locale.notifyAll();
 		}
 
-		System.out.println("Le Broker " + this.name + "est bien connecté sur le port " + port);
+		System.out.println("Le Broker " + this.name + " est bien connecté sur le port " + port);
 
 		return locale;
 	}

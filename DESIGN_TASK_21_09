@@ -15,3 +15,12 @@ Design de la class Task :
 Cette class doit étendre la class Thread fournie par Java car nos task peuvent être interprétées comme des processus d'execution. Les tasks doivent donc avoir le même comportement que des threads. 
 
 ====================================================================================================================
+
+MODIFICATION/AJOUT DU DESIGN :
+Dans la version précédente, on utilisait une hashMap "BrokerDealer" pour gérer les différents Brokers Crées. 
+Dans la nouvelle version, nous allons utiliser une Classe nommée BrokerManager qui permettra de relier les brokers à leur nom 
+	
+On introduira également une class permettant de gérer les port associés au borker. Cette class se nommera PortManager. Une instance de cette classe sera créée pour chaque Broker permettant de gérer les connexion sur chaque port. La méthode accept() sera traitée dans cette classe. 
+La méthode connect d'un broker appellera la méthode "demandeDeConnexion" de cette classe. Une map permettra de mettre en attente une task voulant se connecter à un port spécifique. 
+
+

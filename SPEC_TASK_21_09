@@ -2,7 +2,7 @@ Spécification des TASK :
 
 Les classes sont abstract, et l'utilisateur devra faire un new d'une sous classe et pas de la classe elle même.
 
-La classe broker permet de créer des objets channel avec un nom et un port.
+La classe Broker permet de créer des objets channel avec un nom et un port.
 La méthode Channel accept permet d'accepter une conexion sur un port spécifique. C'est une méthode bloquante qui renvoie un objet channel.
 La méthode channel connect permet de demander une connexion sur un port spécifique et sur un broker spécifique (il est identifier par son nom). C'est une méthode bloquante qui renvoie un autre objet channel.
 Chaque tâche à son propre broker et son propre channel. Deux objets channel forment donc le canal de communication entre deux tâches.
@@ -14,4 +14,14 @@ La méthode write revoie le nombre d'octets qui ont été réellement envoyé, e
 Les tâches sont des entités qui s'envoient/ reçoivent des bytes au travers d'un channel. 
 Les méthodes ci-dessous ne sont pas thread-safe si on peut partagers les channels avec plus de deux tâches. 
 
+=============================================================================
+
+MODIFICATION/AJOUT DE LA SPEC : 
+
+BROKER : Les broker sont des objets permettant, en se connectant ensemble, de créer des Channels. Les Channels crées par chaque Broker permettront ensuite la communication entre deux Task. La méthode Channel accept est une méthode bloquante qui attend une connexion de la part d'un autre Broker (d'une autre Channel).  La méthode Channel connect permet d'initier la connexion entre deux channel. Cette méthode bloquante attend qu'un autre Broker accepte la connexion. 
+
+CHANNEL : Deux objets channels permettent la communication entre deux task. La connexion est un flux d'octet FIFO et sans perte. Les objets channels sont créés pas la connexion entre les Broker et non pas par les task elle-mêmes. La méthode read renvoie le nombre d'octets effectivement lu par la tâche. Cette méthode doit être bloquante tant qu'il n'y a pas quelquechose à lire sur le channel. La méthode write revoie le nombre d'octets qui ont été réellement envoyé, et -1 si il y a eu une erreur.
+
+Les tâches sont des entités qui s'envoient/ reçoivent des bytes au travers d'un channel. 
+Les méthodes ci-dessous ne sont pas thread-safe si on peut partagers les channels avec plus de deux tâches. 
 
