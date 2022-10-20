@@ -13,3 +13,14 @@ La classe MessageQueue utilisera les channel pour envoyer/recevoir des messages
 La classe QueueBroker utilisera la classe Broker.
 
 ============================================================================
+
+MODIFICATION APRES LES NOUVEAUX CHANNELS :
+
+Nous allons réutiliser la classe Broker pour consituer les QueueBroker en faisant des appels aux méthodes accept et connect du broker.
+On réutilisera également la class Channel pour créer le canal de communication MessageQueue. 
+
+Méthodes de MessageQueue:
+-La méthode send ne renvera rien. La taille(donc le nombre de paquets) du message effectivement envoyé sera calculé par la fonction. Cette méthode doit être bloquante le temps que tout les paquets soit envoyés.
+-La méthode receive renvera le message reçus. Elle lira la taille du message à recevoir dans l'entête du message.Cette méthode doit être bloquante le temps que tout les paquets du message soit lu.
+
+

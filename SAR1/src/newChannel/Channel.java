@@ -1,4 +1,4 @@
-package messageQueue;
+package newChannel;
 
 import java.io.IOException;
 
