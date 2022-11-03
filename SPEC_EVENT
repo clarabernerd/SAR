@@ -1,0 +1,29 @@
+SPECIFICATION EVENT
+===============================================================================================================================================================
+Jusqu'à maintenant, les task étaient des threads qui effectuaient un seul et même programme.
+On passe maintenant à de la programmation évènementielle : il n'y aura plus qu'une seule thread principale qui effecura plusieurs programmes (les évènements).
+Aucune méthode ne devra être bloquante.
+
+la classe QueueBroker permet toujours de créer un canal de communication entre deux objets MessageQueue. 
+Elle contient une interface AcceptListener, avec une méthode accept qui renvoie la messageQueue. La méthode bind est l'équivalent du "accept" que l'on avait précédement: elle permet d'acepter une connexion sur un port spécifique du broker. La méthode unbind annule la connexion entre deux objets. 
+Elle contient aussi une interface ConnectListener qui comporte :
+	-Une méthode connected qui sera a implémenter par le client (car ici on réagit à des évènements). Cette méthode sera appelée quand une connection est établie. 
+	-Une méthode refused, également à implémenter par le client, qui sera appelé lorsqu'une connexion sera refusée. 
+Finalement, la classe QueueBroker contient une méthode connect qui permet de se connecter à un autre QueueBroker. 
+
+La classe MessageQueue permet de réaliser un canal de communication. Elle contient également une interface IListener contenant les méthodes :
+	-received qui sera implémenté par le client. Elle sera appelée lorsqu'un message aura été reçus sur le canal de communication.
+	-sent, implémentée par le client et appelé au moment de l'envoie d'un message.
+	-closed, implémenté par le client, qui sera appelée si il y a une déconnexion. 
+On met un listener sur la messageQueue pour écouter les évènement qui s'y produisent et pour pouvoir y répondre ensuite par d'autres évènements. 
+Elle contient également la méthode setListenner permettant de donner le listener à un objet messageQueue (chaque messageQueue à un listener). 
+La classe MessageQueue possède aussi deux méthodes send permettant d'envoyer des messages et contenant des cookies permettant de savoir quelle ressource (donc quel buffer) est attribué à qui. 
+Finalement, elle contient les méthodes close et closed permettant repectivement de fermer une connexion et de savoir si une connexion est fermée ou non. 
+
+===============================================================================================================================================================
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+DESIGN EVENT 
+===============================================================================================================================================================
+Pour ce dernier exercice, on ajoute une couche évènementielle par dessus la couche "paquet" des messageQueue. 
+
+Nous allons donc réutiliser les méthodes MessageQueue et QueueBroker en les modifiant. 
+
+Chaque objet MessageQueue aura un objet Listenner permettant d'écouter les les évènement qui se produisent de chaque côté du cannal.
+
+On décomposera tout ce qui peut se produire sur le canal sous forme d'évènement qui eux même appelleront d'autres évènment. C'est une classe appelée Executeur qui sera considéré comme le thread principale. Il contiendra une liste d'évènement qui doivent se dérouler sur le canal, et les effectuera les uns à la suite des autres. L'implémentation de tout les évènement reprendra en partie le code contenue dans les méthode de MessageQueue abordé précédement.  
+
+On utilisera également une classe MapListener qui sera le lien entre chaque channel et chaque listener (étant donné que pour bien fonctionner, un channel à besoin de connaître le listener de son channel voisin et inversement). 
+
+
+===============================================================================================================================================================
