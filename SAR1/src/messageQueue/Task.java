@@ -1,29 +1,35 @@
 package messageQueue;
 
+import java.io.IOException;
+import java.net.PortUnreachableException;
+
 import javax.naming.NameAlreadyBoundException;
+
+import newChannel.Broker;
+import newChannel.ImplBroker;
 
 public class Task extends Thread {
 
-	public String my_name;
-	private QueueBroker queueBrok;
-	private Runnable runna;
+	public String m_name;
+	private  QueueBroker queueBroker;
+	private Runnable m_runnable;
 
-	Task(String name) throws NameAlreadyBoundException {
-		my_name = name;
-		queueBrok = new ImplQueueBroker(name);
+	Task(String name) {
+		m_name = name;
+		queueBroker = new ImplQueueBroker(name);
+
 	}
 
 	public void run() {
-		runna.run();
-	}
-
-	public void setRunnable(Runnable runnable) {
-		runna = runnable;
+		m_runnable.run();
 	}
 
 	public QueueBroker getMyQueueBroker() {
-		return queueBrok;
+		return queueBroker;
 	}
 
+	public void setRunnable(Runnable runnable) {
+		m_runnable = runnable;
+	}
 
 }

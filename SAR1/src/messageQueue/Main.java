@@ -39,6 +39,7 @@ public class Main {
 					String message = "message de " + count;
 					messageQueue.send(message.getBytes(),0,12);
 					byte[] buff = new byte[message.length()];
+					//System.out.println(buff);
 					messageQueue.receive();
 					System.out.println(message);
 					assert new String(buff).equals(message);
@@ -58,5 +59,4 @@ public class Main {
 		
 	}
 	
-
 }
