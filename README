@@ -1,6 +1,7 @@
 Avec quelles branches regarder et/ou quels tags ?
 ============================================================================
 Tout mon travail se trouve sur la brache origine/main.
+Tout le code se trouve dans le dossier "SAR1"
 J'ai garder des traces de tout ce que j'avais fait, mais les packages à regarder son "newChannel" pour les channel, "messageQueue" et "event".
 Les spécification et design sont des fichiers .txt nommés comme suit :
 -"NOUVELLE SPEC CHANNEL" et "NOUVEAU DESIGN CHANNEL" pour les channel (package "newChannel")
