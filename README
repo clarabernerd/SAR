@@ -1,0 +1,29 @@
+Avec quelles branches regarder et/ou quels tags ?
+============================================================================
+Tout mon travail se trouve sur la brache origine/main.
+J'ai garder des traces de tout ce que j'avais fait, mais les packages à regarder son "newChannel" pour les channel, "messageQueue" et "event".
+Les spécification et design sont des fichiers .txt nommés comme suit :
+-"NOUVELLE SPEC CHANNEL" et "NOUVEAU DESIGN CHANNEL" pour les channel (package "newChannel")
+-"SPEC_MESSAGE_QUEUE" et "DESIGN_MESSAGE_QUEUE" pour messageQueue
+-"SPEC_EVENT" et "DESIGN_EVENT" pour l'évènementiel
+============================================================================
+
+
+Ce qui marche et ne marche pas et votre analyze des raisons pour lesquelles cela ne marche pas.
+=============================================================================
+Les channel et messageQueue sans évènementiel fonctionnent. 
+Je n'ai pas réussit à produire un test pour les messageQueue en évènementiel donc je ne sais pas si cela fonctionne ou non.
+Je n'arrive pas bien a comprendre comment écrire un test avec l'executor. 
+=============================================================================
+    
+  
+Comment compiler et exécuter votre code
+=============================================================================
+Pour compiler et exécuter le test de channel : se placer dans le package "newChannel" et lancer le Main.
+On verra plusieurs connexions s'établir entre deux task et des messages s'envoyer.
+
+Pour compiler et exécuter le test de messageQueue sans évènementiel : se placer dans le package "messageQueue" et lancer le Main.
+Le résultat du test est le même que celui des channel. 
+
+On ne peut rien exécuter pour l'évènementiel. 
+=============================================================================
