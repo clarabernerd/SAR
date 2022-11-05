@@ -1,15 +1,11 @@
 package event;
 
-import event.Executor;
-
-public abstract class Event {
+abstract class Event {
 	Executor e;
 	
-	public Event(Executor e) {
+	Event(Executor e) {
 		this.e =e;
 	}
 	
-	public void reac() {
-		
-	}
+	abstract void reac();
 }

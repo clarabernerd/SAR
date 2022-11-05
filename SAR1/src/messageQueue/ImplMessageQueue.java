@@ -9,7 +9,7 @@ public class ImplMessageQueue extends MessageQueue{
 	private boolean closed = false;
 	private ImplChannel channel;
 	
-	ImplMessageQueue(ImplChannel chann){
+	public ImplMessageQueue(ImplChannel chann){
 		channel = chann;
 	}
 	

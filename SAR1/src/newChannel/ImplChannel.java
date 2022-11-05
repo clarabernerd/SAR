@@ -94,7 +94,7 @@ public class ImplChannel extends Channel {
 		second_channel = chann;
 	}
 
-	ImplChannel getMyChannel() {
+	public ImplChannel getMyChannel() {
 		return second_channel;
 	}
 

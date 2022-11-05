@@ -13,11 +13,11 @@ abstract public class Channel {
 		return 0;
 	}
 
-	void disconnect() {
+	public void disconnect() {
 		m_connected = false;
 	}
 
-	boolean disconnected() {
+	public boolean disconnected() {
 		return !m_connected;
 	}
 

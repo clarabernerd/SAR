@@ -26,7 +26,7 @@ public class Executor extends Thread {
 		}
 	}
 	
-	public void post (Event e) {
+	public void post(Event e) {
 		events.add(e);
 	}
 

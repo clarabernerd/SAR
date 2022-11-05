@@ -7,7 +7,7 @@ import javax.naming.NameAlreadyBoundException;
 public class ImplBroker extends Broker {
 
 	public BrokerManager brokerMap = BrokerManager.getInstance();
-	PortManager portManager = new PortManager(this);
+	public PortManager portManager = new PortManager(this);
 
 	public ImplBroker(String name) {
 		super(name);

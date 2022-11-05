@@ -1,31 +1,23 @@
 package event;
 
 public abstract class QueueBroker {
-	String name; 
 	
-	public QueueBroker(String name) {
-		this.name = name;
+	QueueBroker(String name) {
 	}
 	
 	public interface IAcceptListener {
 		void accepted (int port, MessageQueue queue);
 	}
 	
-	public boolean bind(int port, IAcceptListener listener) {
-		return false;
-	}
+	public abstract boolean bind(int port, IAcceptListener listener);
 	
-	public boolean unbind(int port) {
-		return false;
-	}
+	abstract boolean unbind(int port);
 	
-	public interface ConnectListener{
+	public interface IConnectListener{
 		void connected (String name, int port, MessageQueue queue);
 		void refused(String name, int port);
 	}
 	
-	public boolean connect (String name, int port, ConnectListener listener) {
-		return false;
-	}
+	abstract boolean connect (String name, int port, IConnectListener listener);
 
 }

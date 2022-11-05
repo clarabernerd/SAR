@@ -3,7 +3,7 @@ package newChannel;
 import java.net.PortUnreachableException;
 
 abstract public class Broker {
-	String m_name;
+	public String m_name;
 
 	Broker(String name) {
 		m_name = name;

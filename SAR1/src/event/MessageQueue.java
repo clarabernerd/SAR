@@ -1,32 +1,25 @@
 package event;
 
+
+
 public abstract class MessageQueue {
-	IListener l;
 	
-	public interface IListener {
+	public abstract interface IListener {
 		
 		void received(byte[] msg);
-		void send (byte[] bytes, int offset, int length, Object cookie);
+		void sent (byte[] bytes, int offset, int length, Object cookie);
 		void closed();
 	}
 	
-	void setListener(IListener l) {
-		this.l = l;
-	}
+	public abstract void setListener(IListener listener);
 	
-	public boolean send (byte[] bytes, Object cookie) {
-		return false;
-	}
+	public abstract boolean send (byte[] bytes, Object cookie);
 	
-	public boolean send(byte[] bytes, int offset, int length, Object cookie) {
-		return false;
-	}
+	abstract boolean send(byte[] bytes, int offset, int length, Object cookie);
 	
-	public void close() {
-	}
+	abstract void close();
 	
-	public boolean closed() {
-		return false;
-	}
-	
+	abstract boolean closed();
+
+		
 }
